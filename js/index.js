@@ -1,30 +1,60 @@
 window.onload = function() {
-
     // --------------------- STEP 1 ---------------------
         // Par defaut le formulaire de connection est afficher, le formulaire d'inscription quand a lui est en 'display: none';
         // FAITE EN SORTE QUE AU CLICK SUR LES BUTTONS POSSEDANT LA CLASS 'square-button-empty'
             // DE MASQUER LE LOGIN FORM POUR AFFICHER LE REGISTER FORM, ET INVERSEMENT <->
 
+var signup = document.querySelectorAll(".square-button-empty");
 
+for (var i= 0; i<signup.length; i++){
 
+    signup[i].onclick = function(e){
+    var regist = document.querySelector("#register-form");
+    var con = document.querySelector("#connexion-form");
 
+    // con.style.display = "none";
+    // regist.style.display ="flex";
 
+if(e.target.getAttribute("data-form") == 0){
+    con.style.display = "none";
+    regist.style.display ="flex";
+}
 
-
+else if (e.target.getAttribute("data-form") != 1){
+    con.style.display = "flex"
+    regist.style.display ="none"}
+}
+}
+  
 
     // --------------------- STEP 2 ----------------------
         // maintenant que l'on peut afficher nos 2 formulaires l'intéret serait maintenant qu'ils fonctionnent ! pour cela :
-        // FAITE EN SORTE QUE AU CLICK SUR LES BUTTONS POSSEDANT LA CLASS 'square-button' DE :
+        // FAITE EN SORTE QU'AU CLICK SUR LES BOUTONS POSSEDANT LA CLASS 'square-button' DE :
             //  1. récuperer la valeur de tout les champs de formulaires
             //  2. vérifier que le 'username' fait au moins 5 caracteres alphanumérique
             //  3. vérifier que le password fait au moins 8 caracteres et contient a minima une majuscule/minuscule ainsi qu'un entier (integer)
 
+var recupere1 = document.getElementById("square-button1");
+var recupere2 = document.getElementById("square-button2");
+var inputForm1 = document.getElementsByClassName("form-control-connexion");
+var inputForm2 = document.getElementsByClassName("form-control-register");
 
+    recupere1.addEventListener("click",function(e){
+    
+    for (var i= 0; i<inputForm1.length; i++){
+    var inputValue = inputForm1[i].value;
+    console.log(inputValue);
+    }
+}) 
 
-
-
-
-    // --------------------- STEP 3 -------------------------
+    recupere2.addEventListener("click",function(e){
+    
+    for (var i= 0; i<inputForm2.length; i++){
+    var inputValue = inputForm2[i].value;
+    console.log(inputValue);
+    }
+})
+        // --------------------- STEP 3 -------------------------
         // une fois nos saisies utilisateurs stocker dans des variables faite en sorte de :
         // A L'INSCRIPTION :
 
@@ -56,4 +86,5 @@ window.onload = function() {
             // 2. Si les données saisies correspondent a celles présentes dans le 'localStorage', rediriger l'utilisateur sur la page 'home.html'
 
 
-}
+
+} 
