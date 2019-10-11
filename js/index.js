@@ -25,87 +25,98 @@ else if (e.target.getAttribute("data-form") != 1){
     regist.style.display ="none"}
 }
 }
-  
-
-    // --------------------- STEP 2 ----------------------
+        // --------------------- STEP 2 ----------------------
         // maintenant que l'on peut afficher nos 2 formulaires l'intéret serait maintenant qu'ils fonctionnent ! pour cela :
         // FAITE EN SORTE QU'AU CLICK SUR LES BOUTONS POSSEDANT LA CLASS 'square-button' DE :
             //  1. récuperer la valeur de tout les champs de formulaires
             //  2. vérifier que le 'username' fait au moins 5 caracteres alphanumérique
             //  3. vérifier que le password fait au moins 8 caracteres et contient a minima une majuscule/minuscule ainsi qu'un entier (integer)
+class User {
+            constructor(username, email, password) {
+                    this.username = username;
+                    this.email = email;   
+                    this.password = password;
+            }   
+            getUsername(){return this.username}
+            getEmail(){return this.email}
+            getPassword(){return this.password}
+            }   
 
-var recupere1 = document.getElementById("square-button1");
-var recupere2 = document.getElementById("square-button2");
-var inputForm1 = document.getElementsByClassName("form-control-connexion");
-var inputForm2 = document.getElementsByClassName("form-control-register");
+// CORRECTION STEP 2 BRIAN ADAPTEE !! 
 
-    recupere1.addEventListener("click",function(e){
-    
-    for (var i= 0; i<inputForm1.length; i++){
-    var inputValue = inputForm1[i].value;
-    console.log(inputValue);
-    }
-})
-    // ici se trouve registrer //
+        var loginButton = document.getElementById('login-submit');
+        var registerButton = document.getElementById('register-submit');
 
-    recupere2.addEventListener("click",function(e){
-    
-    for (var i= 0; i<inputForm2.length; i++){ 
-        var inputValue = inputForm2[i].value;
-        console.log(inputValue);
+            function showAlert(message){
+                alert(message);
+            }
 
-        if (i == 0) {
-            checkpassword2 ();
-        }
+            function checkUsername(username) {
+                if (username.length < 5)
+                    return false;
+                else
+                    return true;
+            }
 
-        if (i == 2) {
+            function checkPassword(password) {
+                var passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
+                    if (passwordRegex.test(password))
+                        return true;
+                    else
+                        return false;
+            }
 
-            password_register ();
-        }
+            loginButton.onclick = function (event) {
+                let form = document.getElementById('connexion-form');
+                let email = form[0].value;
+                let password = form[1].value;
 
-        if (i == 3) {
-            password_register_confirm()
-    }
+                userString = localStorage.getItem('user'); {
+                        
+// REDIRECTION VERS PAGE HOME.HTML
 
-    function checkpassword2 (){ 
+                    if (user != null){
+                        user = JSON.parse(userString);
+                    if (user.email == email && user.password == password) {
+                        document.location.href="file:///C:/Users/bessa/Documents/SIMPLON/JavascriptMe_correction-step2/JavascriptMe/home.html"; 
+                    }
+                    else showAlert("Erreur email ou mot de passe !");
+                    }      
+                }
+            }    
 
-        var y = document.getElementById("username_register").value;
-        if(y.length <= 5){ 
-            alert("Entrer un pseudonyme avec" + " " + 5 + " " + "caractères minimum");
-            return true;
-        }
-        else{ 
-            alert("Votre pseudonyme est accepté.");
-            return false;
-        }
-    }
+            registerButton.onclick = function (event) {
+                let form = document.getElementById('register-form');
+                let username = form[0].value;
+                let email = form[1].value;
+                let password = form[2].value;
+                let password_confirm = form[3].value;
+                let error = false;
+                let usernameStatus = checkUsername(username);
+                    if(usernameStatus != true) {
+                        showAlert('L\'username doit comporter au moins 5 caracteres')
+                            error = true;
+                    }
 
-    function password_register (){
+                let passwordStatus = checkPassword(password);
+                    if(passwordStatus != true) {
+                        showAlert('Votre mot de passe doit comporter au moins (1 minuscule, 1 majuscule, 1 chiffre)')
+                            error = true;
+                    }
 
-        var x = document.getElementById("password_register").value;
-        if(x.match(/^(?=.{10,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/)){
-            alert("Entrer un mot de passe avec" + " " + 8 + "characters minimum, une majuscule et un chiffre");
-            return true;
-        }
-        else{ 
-            alert("Votre password est accepté.");
-            return false;
-        }
-    }
+                    if(password !== password_confirm) {
+                        showAlert('La confirmation du mot de passe à echouer')
+                            error = true;
+                    }
+                    
+                    if(error == false) {
+                        var user = new User (username, email, password);
+                            
+                        localStorage.setItem("user", JSON.stringify(user));  
 
-
-    function password_register_confirm(){
-         var x = document.getElementById("password_register_confirm").value;
-        if(x.match(/^(?=.{10,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/)){
-            alert("Entrer un mot de passe avec" + " " + 8 + "characters minimum, une majuscule et un chiffre");
-            return true;
-        }
-        else{ 
-            alert("Votre password est confirmé.");
-            return false;
-    }
-
-}
+                        console.log ("Bonjour" + user.getUsername () + "!");    
+                    }
+                }
         // --------------------- STEP 3 -------------------------
         // une fois nos saisies utilisateurs stocker dans des variables faite en sorte de :
         // A L'INSCRIPTION :
@@ -121,32 +132,19 @@ var inputForm2 = document.getElementsByClassName("form-control-register");
             // 2. Modifier ensuite le code ci dessus pour qu'a l'instantation d'un nouvelle 'User' ---
             // --> on utilise les données saisie du formulaire d'inscription pour setup les propriétés notre nouvelle 'User'
             // puis on stocke ce nouvelle objet utilisateurs dans le 'localStorage' sous la clé 'user'
-    class User {
-    
-        constructor(username, email, password) {
-            this.username = username;
-            this.email = email;   
-            this.password = password;
-        }   
-        getUsername(){return this.username}
-        getemail(){return this.email}
-        getpassword(){return this.password}
-}   
-  
 
-//     let user = new User 
+            
+                 //le localStorage ne contient que des strings, il faut JSON pour le convertir dans un sens et dans l'autre. JSON est un objet ! Tjrs en MAJUSCULE
 
-//     function Personne(nom) {
-//     this.nom = nom;
-//     this.salutation = function() {
-//     alert('Bonjour ! Je m\'appelle ' + this.nom + '.');
-//   };
-// }
+                userString = localStorage.getItem('user');
+                user = JSON.parse(userString);
 
+                function recuperer (){
 
-
-
-    // --------------------- STEP 4 -------------------------
+                form = document.getElementsByTagName("input")[0];
+                form = localStorage.getItem("username"),("email"),("password"); 
+            }
+        // --------------------- STEP 4 -------------------------
         // une fois nos saisies utilisateurs stocker dans des variables faite en sorte de :
         // A LA CONNEXION :
 
@@ -156,8 +154,4 @@ var inputForm2 = document.getElementsByClassName("form-control-register");
                     // 1.2.1 si l'email ou le mot de passe ne correspondent pas, retourner un message d'erreur (les alert() sont proscrit)
 
             // 2. Si les données saisies correspondent a celles présentes dans le 'localStorage', rediriger l'utilisateur sur la page 'home.html'
-
-
-}
-})
 }
