@@ -51,37 +51,60 @@ var inputForm2 = document.getElementsByClassName("form-control-register");
     recupere2.addEventListener("click",function(e){
     
     for (var i= 0; i<inputForm2.length; i++){ 
-    var inputValue = inputForm2[i].value;
-    console.log(inputValue);
-    checkpassword2 ();
-    password_register ();
+        var inputValue = inputForm2[i].value;
+        console.log(inputValue);
+
+        if (i == 0) {
+            checkpassword2 ();
+        }
+
+        if (i == 2) {
+
+            password_register ();
+        }
+
+        if (i == 3) {
+            password_register_confirm()
     }
 
     function checkpassword2 (){ 
 
-    var y = document.getElementById("username-register").value;
-    if(y.length <= 5){ 
-    alert("Entrer un pseudonyme avec" + " " + 5 + " " + "caractères minimum");
-    return true;
-    }
-    else{ 
-    alert("Votre pseudonyme est accepté.");
-    return false;
+        var y = document.getElementById("username_register").value;
+        if(y.length <= 5){ 
+            alert("Entrer un pseudonyme avec" + " " + 5 + " " + "caractères minimum");
+            return true;
+        }
+        else{ 
+            alert("Votre pseudonyme est accepté.");
+            return false;
+        }
     }
 
     function password_register (){
 
-    var x = document.getElementById("password-register").value;
-    if(/x.^?=.{8,}$?=.*?[A-Z]?=.*[0-9]/){ 
-    alert("Entrer un mot de passe avec" + " " + 8 + "characters minimum, une majuscule et un chiffre");
-    return true;
-    }
-    else{ 
-    alert("Votre pseudonyme est accepté.");
-    return false;
+        var x = document.getElementById("password_register").value;
+        if(x.match(/^(?=.{10,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/)){
+            alert("Entrer un mot de passe avec" + " " + 8 + "characters minimum, une majuscule et un chiffre");
+            return true;
+        }
+        else{ 
+            alert("Votre password est accepté.");
+            return false;
+        }
     }
 
-}
+
+    function password_register_confirm(){
+         var x = document.getElementById("password_register_confirm").value;
+        if(x.match(/^(?=.{10,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/)){
+            alert("Entrer un mot de passe avec" + " " + 8 + "characters minimum, une majuscule et un chiffre");
+            return true;
+        }
+        else{ 
+            alert("Votre password est confirmé.");
+            return false;
+    }
+
 }
         // --------------------- STEP 3 -------------------------
         // une fois nos saisies utilisateurs stocker dans des variables faite en sorte de :
@@ -98,18 +121,18 @@ var inputForm2 = document.getElementsByClassName("form-control-register");
             // 2. Modifier ensuite le code ci dessus pour qu'a l'instantation d'un nouvelle 'User' ---
             // --> on utilise les données saisie du formulaire d'inscription pour setup les propriétés notre nouvelle 'User'
             // puis on stocke ce nouvelle objet utilisateurs dans le 'localStorage' sous la clé 'user'
-class User {
+    class User {
     
-    constructor(username, email, password) {
-        this.username = username;
-        this.email = email;   
-        this.password = password;
-    }   
-    getUsername(){return this.username}
-    getemail(){return this.email}
-    getpassword(){return this password}
+        constructor(username, email, password) {
+            this.username = username;
+            this.email = email;   
+            this.password = password;
+        }   
+        getUsername(){return this.username}
+        getemail(){return this.email}
+        getpassword(){return this.password}
 }   
-}   
+  
 
 //     let user = new User 
 
@@ -135,5 +158,6 @@ class User {
             // 2. Si les données saisies correspondent a celles présentes dans le 'localStorage', rediriger l'utilisateur sur la page 'home.html'
 
 
-});
-} 
+}
+})
+}
