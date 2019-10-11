@@ -45,15 +45,44 @@ var inputForm2 = document.getElementsByClassName("form-control-register");
     var inputValue = inputForm1[i].value;
     console.log(inputValue);
     }
-}) 
+})
+    // ici se trouve registrer //
 
     recupere2.addEventListener("click",function(e){
     
-    for (var i= 0; i<inputForm2.length; i++){
+    for (var i= 0; i<inputForm2.length; i++){ 
     var inputValue = inputForm2[i].value;
     console.log(inputValue);
+    checkpassword2 ();
+    password_register ();
     }
-})
+
+    function checkpassword2 (){ 
+
+    var y = document.getElementById("username-register").value;
+    if(y.length <= 5){ 
+    alert("Entrer un pseudonyme avec" + " " + 5 + " " + "caractères minimum");
+    return true;
+    }
+    else{ 
+    alert("Votre pseudonyme est accepté.");
+    return false;
+    }
+
+    function password_register (){
+
+    var x = document.getElementById("password-register").value;
+    if(/x.^?=.{8,}$?=.*?[A-Z]?=.*[0-9]/){ 
+    alert("Entrer un mot de passe avec" + " " + 8 + "characters minimum, une majuscule et un chiffre");
+    return true;
+    }
+    else{ 
+    alert("Votre pseudonyme est accepté.");
+    return false;
+    }
+
+}
+}
         // --------------------- STEP 3 -------------------------
         // une fois nos saisies utilisateurs stocker dans des variables faite en sorte de :
         // A L'INSCRIPTION :
@@ -69,7 +98,27 @@ var inputForm2 = document.getElementsByClassName("form-control-register");
             // 2. Modifier ensuite le code ci dessus pour qu'a l'instantation d'un nouvelle 'User' ---
             // --> on utilise les données saisie du formulaire d'inscription pour setup les propriétés notre nouvelle 'User'
             // puis on stocke ce nouvelle objet utilisateurs dans le 'localStorage' sous la clé 'user'
+class User {
+    
+    constructor(username, email, password) {
+        this.username = username;
+        this.email = email;   
+        this.password = password;
+    }   
+    getUsername(){return this.username}
+    getemail(){return this.email}
+    getpassword(){return this password}
+}   
+}   
 
+//     let user = new User 
+
+//     function Personne(nom) {
+//     this.nom = nom;
+//     this.salutation = function() {
+//     alert('Bonjour ! Je m\'appelle ' + this.nom + '.');
+//   };
+// }
 
 
 
@@ -86,5 +135,5 @@ var inputForm2 = document.getElementsByClassName("form-control-register");
             // 2. Si les données saisies correspondent a celles présentes dans le 'localStorage', rediriger l'utilisateur sur la page 'home.html'
 
 
-
+});
 } 
