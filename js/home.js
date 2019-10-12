@@ -1,20 +1,9 @@
-window.onload = function() {
-    readFile('data/articles.json', function(articles) {
-        console.log(articles);
-
-        // --------------------- STEP 0 (informations) ---------------------
-            // Dans le dossier data ce trouve un fichier 'JSON' qui contient une liste d'article
+       // --------------------- (informations) ---------------------
+            // Dans le dossier data se trouve un fichier 'JSON' qui contient une liste d'article
             // CI-DESSUS la fonction 'readFile' fait une 'requette ajax' pour récuperer le contenue du fichier 'articles.json'
             // Le premier parametre de la fonction est le chemin d'acces au fichier
             // le deuxieme, est une fonction 'callback' qui nous permet d'avoir accès au données sous la forme d'une variables
-            // cette variable est un 'array' contenant une plusieurs objet correspondant chacun a un article
-
-
-
-
-
-
-
+            // cette variable est un 'array' contenant plusieurs objets correspondant chacun a un article
 
         // --------------------- STEP 1 ---------------------
             // 1. FAITE EN SORTE DE POUVOIR INSTANCIER UN OBJET 'Article' A PARTIR DES DONNEES DE LA VARIABLE 'articles'
@@ -24,8 +13,40 @@ window.onload = function() {
                 // exemple : this.SetTitle = function(newTitle) { this.title = newTitle; } <----- ceci est un SETTER
 
 
+// window.onload = function() {
+//     readFile('data/articles.json', function(articles) {
+//         // console.log(articles);
+
+//         // let article = new Article ();
+                
+//         //     article.id = "id", 
+//         //     article.title = "title", 
+//         //     article.content = "content", 
+//         //     article.resumes = "resumes", 
+//         //     article.author = "author", 
+//         //     article.publishedDate = "publishedDate", 
+//         //     article.img = "img", 
+//         //     article.tags = "tags",      
+//         // }
 
 
+        function Article(id, title, content, resumes, author, publishedDate, img, tags) {
+            this.id = id;
+            this.title = title;
+            this.content = content;
+            this.resumes = resumes;
+            this.author = author;
+            this.publishedDate = publishedDate;
+            this.img = img;
+            this.tags = tags;
+        }   
+
+        console.log("id");
+ 
+
+     
+
+  
 
 
 
@@ -72,5 +93,5 @@ window.onload = function() {
 
 
 
-    });
-}
+//     });
+// }

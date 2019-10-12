@@ -14,6 +14,5 @@ window.onload = function() {
         // BIEN SUR QUE NON !
         // Il serait donc peut-etre jusdicieux d'organiser notre code en utilisant des fonctions dynamique réutilisable ;-)
 
-
-
+        // }
 }
